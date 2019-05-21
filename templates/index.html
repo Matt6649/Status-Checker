@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Website Status Checker</title>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet"> 
+        <link href="/static/skeleton.css" rel="stylesheet">
+        <link href="/static/normalize.css" rel="stylesheet">
+        <style>
+            body {
+                background-color: antiquewhite;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Status Checker</h1>
+            <br>
+            <br>
+            <form method="GET,POST" action="/">
+                 <input type="text" name="url" value="{{url}}">
+                 <input class="button-primary" type="submit" value="Submit">
+            </form>
+            {% if success==True %}
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="six columns">
+                        <h5>HTTP</h5>
+                        <h6>{{http}}</h6>
+                        {% if http==301 or http==200 or http==302 or http==303 or http==304 or http==307 or http==308 %}
+                            <img src="static/tick.png" width="10%" height="10%" title="This site is up for http connections.">
+                        {% endif %}
+                        {% if http!=301 and http!=200 and http!=302 and http!=303 and http!=304 and http!=307 and http!=308 %}
+                            <img src="static/cross.png" width="10%" height="10%" title="This site is down for http connections.">
+                        {% endif %}
+                    </div>
+                    <div class="six columns">
+                        <h5>HTTPS</h5>
+                        <h6>{{https}}</h6>
+                        {% if https==301 or https==200 or https==302 or https==303 or https==304 or https==307 or https==308 %}
+                            <img src="/static/tick.png" width="10%" height="10%" title="This site is up for https connections.">
+                        {% endif %}
+                        {% if https!=301 and https!=200 and https!=302 and https!=303 and https!=304 and https!=307 and https!=308 %}
+                            <img src="/static/cross.png" width="10%" height="10%" title="This site is down for https connections.">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </center>
+    </body>
+</html>
